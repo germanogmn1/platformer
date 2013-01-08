@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Foundation;
 
 namespace Platformer.Screens
 {
@@ -20,7 +21,7 @@ namespace Platformer.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (KeyListener.IsKeyPressed(Keys.Space))
                 Manager.EnterScreen<GamePlayScreen>();
         }
 

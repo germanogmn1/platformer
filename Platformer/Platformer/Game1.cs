@@ -31,6 +31,7 @@ namespace Platformer
 
             screenManager = new ScreenManager(this);
             Components.Add(screenManager);
+            Components.Add(new KeyListener(this));
             Components.Add(new FramerateCounter(this));
         }
 
