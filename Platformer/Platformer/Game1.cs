@@ -30,8 +30,9 @@ namespace Platformer
             Graphics.PreferredBackBufferHeight = 720;
 
             screenManager = new ScreenManager(this);
-            Components.Add(screenManager);
+            //Components.Add(screenManager);
             Components.Add(new KeyListener(this));
+            Components.Add(new PhysicsComponent(this));
             Components.Add(new FramerateCounter(this));
         }
 
