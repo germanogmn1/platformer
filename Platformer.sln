@@ -3,14 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer", "Platformer\Platformer\Platformer.csproj", "{61091302-6058-4FAE-B2B4-BA5628CF32CA}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "PlatformerContent", "Platformer\PlatformerContent\PlatformerContent.contentproj", "{39766D00-EBB9-492B-8647-44776FDA6567}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformerContent", "Platformer\PlatformerContent\PlatformerContent.contentproj", "{39766D00-EBB9-492B-8647-44776FDA6567}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D4222DE-CB29-4925-B35F-E25DBA97DB1B}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-		Platformer.vsmdi = Platformer.vsmdi
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation", "Foundation\Foundation.csproj", "{C8AF4E54-2F2E-495A-917B-485C43A4C803}"
 EndProject
