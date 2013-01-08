@@ -18,7 +18,8 @@ namespace Platformer
     {
         public GraphicsDeviceManager Graphics { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
-        public ScreenManager ScreenManager { get; private set; }
+        
+        private ScreenManager screenManager;
 
         public Game1()
         {
@@ -28,15 +29,15 @@ namespace Platformer
             Graphics.PreferredBackBufferWidth = 1280;
             Graphics.PreferredBackBufferHeight = 720;
 
-            ScreenManager = new ScreenManager(this);
-            Components.Add(ScreenManager);
+            screenManager = new ScreenManager(this);
+            Components.Add(screenManager);
             Components.Add(new FramerateCounter(this));
         }
 
         protected override void Initialize()
         {
-            ScreenManager.AddScreen(new StartScreen());
-            ScreenManager.AddScreen(new GamePlayScreen());
+            screenManager.AddScreen(new StartScreen());
+            screenManager.AddScreen(new GamePlayScreen());
             base.Initialize();
         }
 
