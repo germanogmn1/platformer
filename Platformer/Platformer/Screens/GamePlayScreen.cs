@@ -47,7 +47,7 @@ namespace Platformer.Screens
             Game.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             Game.SpriteBatch.Begin();
-            Game.SpriteBatch.DrawString(font, "Gameplay - ESC para sair", new Vector2(10, 10), Color.White);
+            Game.SpriteBatch.DrawString(font, "Gameplay - ESC para sair", new Vector2(10, 680), Color.White);
             Game.SpriteBatch.Draw(sprite, position, Color.White);
             Game.SpriteBatch.End();
         }

@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Platformer.Screens;
 using Foundation.ScreenManager;
+using Foundation;
 
 namespace Platformer
 {
@@ -29,6 +30,7 @@ namespace Platformer
 
             ScreenManager = new ScreenManager(this);
             Components.Add(ScreenManager);
+            Components.Add(new FramerateCounter(this));
         }
 
         protected override void Initialize()
