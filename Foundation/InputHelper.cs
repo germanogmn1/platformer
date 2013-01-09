@@ -97,7 +97,8 @@ namespace Foundation
 
             if (difference != 0)
             {
-                MouseScrolled(difference);
+                if (MouseScrolled != null)
+                    MouseScrolled(difference);
                 lastScrollState = current;
             }
         }
