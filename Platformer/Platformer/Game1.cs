@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Platformer.Screens;
 using Foundation.ScreenManager;
 using Foundation;
+using Platformer.Physics;
 
 namespace Platformer
 {
@@ -30,14 +31,14 @@ namespace Platformer
             Graphics.PreferredBackBufferHeight = 720;
 
             screenManager = new ScreenManager(this);
-            //Components.Add(screenManager);
-            Components.Add(new KeyListener(this));
-            Components.Add(new PhysicsComponent(this));
+            Components.Add(screenManager);
+            Components.Add(new InputHelper(this));
             Components.Add(new FramerateCounter(this));
         }
 
         protected override void Initialize()
         {
+            IsMouseVisible = true;
             screenManager.AddScreen(new StartScreen());
             screenManager.AddScreen(new GamePlayScreen());
             base.Initialize();
