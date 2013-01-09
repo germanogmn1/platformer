@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Foundation;
 using Platformer.Physics;
+using Foundation.Camera;
 
 namespace Platformer.Screens
 {
@@ -29,6 +30,9 @@ namespace Platformer.Screens
         {
             if (InputHelper.IsKeyPressed(Keys.Escape))
                 Game.Exit();
+
+            Vector2 mouse = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            Debugger.Debug("Mouse Screen", mouse);
         }
 
         public override void Draw(GameTime gameTime)

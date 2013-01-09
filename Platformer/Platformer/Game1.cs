@@ -34,6 +34,7 @@ namespace Platformer
             Components.Add(screenManager);
             Components.Add(new InputHelper(this));
             Components.Add(new FramerateCounter(this));
+            Components.Add(new Debugger(this));
         }
 
         protected override void Initialize()
