@@ -7,41 +7,41 @@ using Microsoft.Xna.Framework;
 namespace Foundation.Camera
 {
     /// <summary>
-    /// Convert units between physics world and screen
+    /// Convert units between physics world and display
     /// </summary>
     public static class ConvertUnits
     {
         public static readonly float PixelsPerMeter = 100f;
 
         #region ToWorld
-        public static float ToWorld(float screen)
+        public static float ToWorld(float display)
         {
-            return screen / PixelsPerMeter;
+            return display / PixelsPerMeter;
         }
 
-        public static Vector2 ToWorld(Vector2 screen)
+        public static Vector2 ToWorld(Vector2 display)
         {
-            return screen / PixelsPerMeter;
+            return display / PixelsPerMeter;
         }
 
-        public static Vector3 ToWorld(Vector3 screen)
+        public static Vector3 ToWorld(Vector3 display)
         {
-            return screen / PixelsPerMeter;
+            return display / PixelsPerMeter;
         }
         #endregion
 
-        #region ToScreen
-        public static float ToScreen(float world)
+        #region ToDisplay
+        public static float ToDisplay(float world)
         {
             return world * PixelsPerMeter;
         }
 
-        public static Vector2 ToScreen(Vector2 world)
+        public static Vector2 ToDisplay(Vector2 world)
         {
             return world * PixelsPerMeter;
         }
 
-        public static Vector3 ToScreen(Vector3 world)
+        public static Vector3 ToDisplay(Vector3 world)
         {
             return world * PixelsPerMeter;
         }

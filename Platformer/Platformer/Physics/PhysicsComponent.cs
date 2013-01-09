@@ -99,11 +99,11 @@ namespace Platformer.Physics
             Game1 game = (Game1)Game;
 
             game.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None,
-                RasterizerState.CullCounterClockwise, null, camera.ScreenView);
+                RasterizerState.CullCounterClockwise, null, camera.DisplayView);
 
-            game.SpriteBatch.Draw(ballSprite.Texture, ConvertUnits.ToScreen(ball1.Position), null, Color.White, ball1.Rotation, ballSprite.Origin, ballSprite.Scale, SpriteEffects.None, 0f);
-            game.SpriteBatch.Draw(bigBallSprite.Texture, ConvertUnits.ToScreen(ball2.Position), null, Color.White, ball2.Rotation, bigBallSprite.Origin, bigBallSprite.Scale, SpriteEffects.None, 0f);
-            game.SpriteBatch.Draw(ballSprite.Texture, ConvertUnits.ToScreen(ball3.Position), null, Color.White, ball3.Rotation, ballSprite.Origin, ballSprite.Scale, SpriteEffects.None, 0f);
+            game.SpriteBatch.Draw(ballSprite.Texture, ConvertUnits.ToDisplay(ball1.Position), null, Color.White, ball1.Rotation, ballSprite.Origin, ballSprite.Scale, SpriteEffects.None, 0f);
+            game.SpriteBatch.Draw(bigBallSprite.Texture, ConvertUnits.ToDisplay(ball2.Position), null, Color.White, ball2.Rotation, bigBallSprite.Origin, bigBallSprite.Scale, SpriteEffects.None, 0f);
+            game.SpriteBatch.Draw(ballSprite.Texture, ConvertUnits.ToDisplay(ball3.Position), null, Color.White, ball3.Rotation, ballSprite.Origin, ballSprite.Scale, SpriteEffects.None, 0f);
 
             game.SpriteBatch.End();
 
