@@ -85,7 +85,7 @@
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.dataGrid);
             this.Name = "DebuggerForm";
-            this.Text = "DebuggerForm";
+            this.Text = "Debugger Window";
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
             this.ResumeLayout(false);
 
