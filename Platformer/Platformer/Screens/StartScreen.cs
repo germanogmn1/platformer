@@ -21,7 +21,7 @@ namespace Platformer.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (InputHelper.IsKeyPressed(Keys.Space))
+            if (InputHelper.KeyPressed(Keys.Space))
                 Manager.EnterScreen<GamePlayScreen>();
         }
 
