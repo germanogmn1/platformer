@@ -1,108 +1,101 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace Foundation
 {
+    public enum MouseButtons { Left, Middle, Right, Extra1, Extra2 }
+
     public class InputHelper : GameComponent
     {
+        private static MouseState lastMouseState;
+        private static MouseState currentMouseState;
+
+        private static KeyboardState lastKeyboardState;
+        private static KeyboardState currentKeyboardState;
+
         static InputHelper()
         {
-            ResetKeyState();
-            ResetMouseState();
+            lastMouseState = new MouseState();
+            currentMouseState = new MouseState();
+
+            lastKeyboardState = new KeyboardState();
+            currentKeyboardState = new KeyboardState();
         }
         
-        public InputHelper(Game game) : base(game) { }
+        /// <summary>
+        /// Check if the keyboard key was pressed since the last game loop
+        /// </summary>
+        /// <param name="key">Wich key to check</param>
+        public static bool KeyPressed(Keys key)
+        {
+            return (currentKeyboardState.IsKeyDown(key) &&
+                    lastKeyboardState.IsKeyUp(key));
+        }
+
+        /// <summary>
+        /// Check if the mouse button was pressed since the last game loop
+        /// </summary>
+        /// <param name="button">Which button to check</param>
+        public static bool MouseButtonPressed(MouseButtons button)
+        {
+            switch (button)
+            {
+                case MouseButtons.Left:
+                    return (currentMouseState.LeftButton == ButtonState.Pressed &&
+                            lastMouseState.LeftButton == ButtonState.Released);
+                case MouseButtons.Middle:
+                    return (currentMouseState.MiddleButton == ButtonState.Pressed &&
+                            lastMouseState.MiddleButton == ButtonState.Released);
+                case MouseButtons.Right:
+                    return (currentMouseState.RightButton == ButtonState.Pressed &&
+                            lastMouseState.RightButton == ButtonState.Released);
+                case MouseButtons.Extra1:
+                    return (currentMouseState.XButton1 == ButtonState.Pressed &&
+                            lastMouseState.XButton1 == ButtonState.Released);
+                case MouseButtons.Extra2:
+                    return (currentMouseState.XButton2 == ButtonState.Pressed &&
+                            lastMouseState.XButton2 == ButtonState.Released);
+                default:
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// Current mouse position on screen
+        /// </summary>
+        public static Vector2 MousePosition
+        {
+            get
+            {
+                return new Vector2(currentMouseState.X, currentMouseState.Y);
+            }
+        }
+
+        /// <summary>
+        /// Get the amount of mouse scroll since the last game loop
+        /// </summary>
+        /// <returns>Zero if no scroll, positive if scrolled up, negative if scrolled down</returns>
+        public static int MouseScrolled()
+        {
+            return currentMouseState.ScrollWheelValue - lastMouseState.ScrollWheelValue;
+        }
+
+        // Non static
+
+        public InputHelper(Game game) : base(game)
+        {
+            // This component needs to be updated first in order
+            // to others get the correct result from static methods
+            UpdateOrder = -1;
+        }
 
         public override void Update(GameTime gameTime)
         {
-            UpdateKeys();
-            UpdateMouse();
+            lastMouseState = currentMouseState;
+            currentMouseState = Mouse.GetState();
+
+            lastKeyboardState = currentKeyboardState;
+            currentKeyboardState = Keyboard.GetState();
         }
-
-        #region Keyboard
-        private enum PressStatus { None, New, Expired }
-
-        private static Dictionary<Keys, PressStatus> keysStatus = new Dictionary<Keys, PressStatus>();
-
-        /// <summary>
-        /// Reset pressed keys state.
-        /// </summary>
-        public static void ResetKeyState()
-        {
-            // OPTIMIZE: Keys enum has 160 entries, it's better to filter it and check only relevant keys.
-            foreach (var key in System.Enum.GetValues(typeof(Keys)).Cast<Keys>())
-                keysStatus[key] = PressStatus.None;
-        }
-
-        private static void UpdateKeys()
-        {
-            var downKeys = Keyboard.GetState().GetPressedKeys();
-
-            foreach (var key in keysStatus.Keys.ToArray())
-            {
-                PressStatus status = keysStatus[key];
-
-                bool isExpired = (status == PressStatus.Expired);
-                bool isDown = downKeys.Contains(key);
-
-                if (isDown && !isExpired)
-                    keysStatus[key] = PressStatus.New;
-                else if (isExpired && !isDown)
-                    keysStatus[key] = PressStatus.None;
-            }
-        }
-
-        /// <summary>
-        /// Check if a specific key has been pressed since the last time
-        /// this method was called for the key.
-        /// </summary>
-        public static bool IsKeyPressed(Keys key)
-        {
-            if (keysStatus[key] == PressStatus.New)
-            {
-                keysStatus[key] = PressStatus.Expired;
-                return true;
-            }
-
-            return false;
-        }
-        #endregion
-
-        #region Mouse
-
-        public delegate void ScrollHandler(int amount);
-        /// <summary>
-        /// Fired when mouse scrolls.
-        /// </summary>
-        public static event ScrollHandler MouseScrolled;
-
-        private static int lastScrollState = 0;
-
-        /// <summary>
-        /// Reset mouse state.
-        /// </summary>
-        public static void ResetMouseState()
-        {
-            lastScrollState = Mouse.GetState().ScrollWheelValue;
-        }
-
-        private static void UpdateMouse()
-        {
-            int current = Mouse.GetState().ScrollWheelValue;
-            int difference = current - lastScrollState;
-
-            if (difference != 0)
-            {
-                if (MouseScrolled != null)
-                    MouseScrolled(difference);
-                lastScrollState = current;
-            }
-        }
-
-        #endregion
     }
 }
